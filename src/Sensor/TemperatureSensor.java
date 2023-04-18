@@ -1,4 +1,4 @@
-package Entity;
+package Sensor;
 
 import Interface.ISensor;
 import Mediator.Mediator;

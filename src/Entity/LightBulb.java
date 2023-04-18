@@ -8,7 +8,7 @@ public class LightBulb implements IActuator {
 
     @Override
     public void receiveCommand(ICommand command) {
-        if (command == LightCommand.ON) {
+        if (command.equals(LightCommand.ON)) {
             System.out.println("Turning lights ON");
         }
         else {

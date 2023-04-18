@@ -10,14 +10,15 @@ public class Thermostat implements IActuator {
     public void receiveCommand(ICommand command) {
         if (command.equals(TemperatureCommand.HIGHER)) {
             currentTemperature += 5;
+            System.out.println("Increasing temperature by 5 degrees");
         }
         else {
             currentTemperature -= 5;
+            System.out.println("Decreasing temperature by 5 degrees");
         }
     }
 
     public void setCurrentTemperature(int temperature) {
         currentTemperature = temperature;
     }
-
 }

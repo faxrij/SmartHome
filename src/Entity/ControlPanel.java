@@ -18,12 +18,20 @@ public class ControlPanel implements IControlPanel {
     @Override
     public void turnLightOn() {
         mediator.turnLightOn();
-
     }
 
     @Override
     public void turnLightOff() {
         mediator.turnLightOff();
+    }
 
+    @Override
+    public void lockDoors() {
+        mediator.lockDoors();
+    }
+
+    @Override
+    public void unlockDoors() {
+        mediator.unlockDoors();
     }
 }

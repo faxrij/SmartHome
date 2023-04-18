@@ -9,7 +9,7 @@ import Entity.Thermostat;
 
 public class Mediator {
     private final Thermostat thermostat;
-    private DoorLock doorLock;
+    private final DoorLock doorLock;
     private final LightBulb lightBulb;
 
     public Mediator(Thermostat thermostat, DoorLock doorLock, LightBulb lightBulb) {
@@ -26,6 +26,11 @@ public class Mediator {
             thermostat.receiveCommand(TemperatureCommand.LOWER);
         }
     }
+
+    public void readMotion(DoorCommand doorCommand) {
+        doorLock.receiveCommand(doorCommand);
+    }
+
     public void turnLightOn() {
         lightBulb.receiveCommand(LightCommand.ON);
     }
@@ -34,7 +39,20 @@ public class Mediator {
         lightBulb.receiveCommand(LightCommand.OFF);
     }
 
+    public void lockDoors() {
+        doorLock.receiveCommand(DoorCommand.LOCK);
+    }
+
+    public void unlockDoors() {
+        doorLock.receiveCommand(DoorCommand.UNLOCK);
+    }
+
+
     public void setTemperature(int temperature) {
         thermostat.setCurrentTemperature(temperature);
+    }
+
+    public void readLight(LightCommand lightCommand) {
+        lightBulb.receiveCommand(lightCommand);
     }
 }
