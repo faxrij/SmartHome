@@ -1,6 +1,6 @@
 package State;
 
 public enum DoorState {
-    OPENED,
-    CLOSED
+    LOCKED,
+    UNLOCKED
 }

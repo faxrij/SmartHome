@@ -17,8 +17,10 @@ public class MainFlow {
     public void start() {
 
     Thermostat thermostat = new Thermostat();
-    DoorLock doorLock = new DoorLock(DoorState.CLOSED);
+
+    DoorLock doorLock = new DoorLock(DoorState.UNLOCKED);
     LightBulb lightBulb = new LightBulb(LightState.OFF);
+
     Mediator mediator = new Mediator(thermostat, doorLock, lightBulb);
 
     ControlPanel controlPanel = new ControlPanel();

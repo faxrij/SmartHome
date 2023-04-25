@@ -10,7 +10,6 @@ import State.LightState;
 public class DoorLock implements IActuator {
 
     private DoorState currentDoorState;
-
     public DoorLock(DoorState doorState) {
         this.currentDoorState = doorState;
     }
@@ -20,17 +19,16 @@ public class DoorLock implements IActuator {
         if (command.getClass()!=DoorCommand.class) {
             throw new RuntimeException();
         }
-
-        if (currentDoorState.name().equals(((DoorCommand) command).name())){
+        if (currentDoorState.name().startsWith(((DoorCommand) command).name())){
             System.out.println("Wanted state is already on for DoorLock");
         }
-        else if (command.equals(DoorCommand.LOCK) && currentDoorState.equals(DoorState.OPENED)){
+        else if (command.equals(DoorCommand.LOCK) && currentDoorState.equals(DoorState.UNLOCKED)){
             System.out.println("Doors are closing");
-            currentDoorState = DoorState.CLOSED;
+            currentDoorState = DoorState.LOCKED;
         }
-        else if (command.equals(DoorCommand.UNLOCK) && currentDoorState.equals(DoorState.CLOSED)){
+        else if (command.equals(DoorCommand.UNLOCK) && currentDoorState.equals(DoorState.LOCKED)){
             System.out.println("Doors are opening");
-            currentDoorState = DoorState.OPENED;
+            currentDoorState = DoorState.UNLOCKED;
         }
     }
 }

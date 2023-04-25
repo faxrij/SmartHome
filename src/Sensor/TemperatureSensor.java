@@ -16,6 +16,7 @@ public class TemperatureSensor implements ISensor {
     public void sendReading() {
         Random rand = new Random();
         int value = rand.nextInt(45);
+        System.out.println("Current Temperature: " + value);
         mediator.readTemperature(value);
     }
 }

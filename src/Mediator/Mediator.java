@@ -6,6 +6,7 @@ import Command.TemperatureCommand;
 import Entity.DoorLock;
 import Entity.LightBulb;
 import Entity.Thermostat;
+import Interface.ICommand;
 
 public class Mediator {
     private final Thermostat thermostat;
@@ -19,12 +20,19 @@ public class Mediator {
     }
 
     public void readTemperature(int temperature) {
-        if (temperature < 20) {
-            thermostat.receiveCommand(TemperatureCommand.HIGHER);
+        ICommand command =  TemperatureCommand.LOWER;
+
+        if (temperature >= 20 && temperature <= 25) {
+            System.out.println("Temperature is fine");
+            return;  // To PREVENT PRINTING LOWER FOR RANGE OF 20 - 25
         }
-        else {
-            thermostat.receiveCommand(TemperatureCommand.LOWER);
+
+        else if (temperature < 20) {
+            command = TemperatureCommand.HIGHER;
         }
+
+        thermostat.receiveCommand(command);
+
     }
 
     public void readMotion(DoorCommand doorCommand) {
