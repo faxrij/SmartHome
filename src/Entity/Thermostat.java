@@ -8,6 +8,9 @@ public class Thermostat implements IActuator {
     private int currentTemperature;
     @Override
     public void receiveCommand(ICommand command) {
+        if (command.getClass()!= TemperatureCommand.class) {
+            throw new RuntimeException();
+        }
         if (command.equals(TemperatureCommand.HIGHER)) {
             currentTemperature += 5;
             System.out.println("Increasing temperature by 5 degrees");
