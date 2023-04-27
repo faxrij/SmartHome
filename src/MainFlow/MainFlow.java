@@ -52,7 +52,6 @@ public class MainFlow {
             controlPanel.chooseRandomEventForMotion();
 
             System.out.println();
-            System.out.println("SALAM");
 
             count++;
             if (count >= 20) {
