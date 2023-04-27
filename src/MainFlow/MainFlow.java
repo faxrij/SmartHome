@@ -1,3 +1,5 @@
+package MainFlow;
+
 import Entity.ControlPanel;
 import Entity.DoorLock;
 import Entity.LightBulb;
@@ -50,6 +52,7 @@ public class MainFlow {
             controlPanel.chooseRandomEventForMotion();
 
             System.out.println();
+            System.out.println("SALAM");
 
             count++;
             if (count >= 20) {
