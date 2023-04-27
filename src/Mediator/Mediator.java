@@ -32,7 +32,6 @@ public class Mediator {
         }
 
         thermostat.receiveCommand(command);
-
     }
 
     public void readMotion(DoorCommand doorCommand) {
@@ -54,7 +53,6 @@ public class Mediator {
     public void unlockDoors() {
         doorLock.receiveCommand(DoorCommand.UNLOCK);
     }
-
 
     public void setTemperature(int temperature) {
         thermostat.setCurrentTemperature(temperature);

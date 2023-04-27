@@ -1,11 +1,9 @@
 package Entity;
 
 import Command.DoorCommand;
-import Command.LightCommand;
 import Interface.IActuator;
 import Interface.ICommand;
 import State.DoorState;
-import State.LightState;
 
 public class DoorLock implements IActuator {
 
@@ -16,9 +14,10 @@ public class DoorLock implements IActuator {
 
     @Override
     public void receiveCommand(ICommand command) {
-        if (command.getClass()!=DoorCommand.class) {
-            throw new RuntimeException();
+        if (!(command instanceof DoorCommand)) {
+            throw new IllegalArgumentException("Invalid command type");
         }
+
         if (currentDoorState.name().startsWith(((DoorCommand) command).name())){
             System.out.println("Wanted state is already on for DoorLock");
         }

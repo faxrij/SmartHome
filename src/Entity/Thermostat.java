@@ -8,8 +8,8 @@ public class Thermostat implements IActuator {
     private int currentTemperature;
     @Override
     public void receiveCommand(ICommand command) {
-        if (command.getClass()!= TemperatureCommand.class) {
-            throw new RuntimeException();
+        if (!(command instanceof TemperatureCommand)){
+            throw new IllegalArgumentException("Invalid command type");
         }
         if (command.equals(TemperatureCommand.HIGHER)) {
             currentTemperature += 5;

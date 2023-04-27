@@ -14,8 +14,8 @@ public class LightBulb implements IActuator {
 
     @Override
     public void receiveCommand(ICommand command) {
-        if (command.getClass()!= LightCommand.class) {
-            throw new RuntimeException();
+        if (!(command instanceof LightCommand)){
+            throw new IllegalArgumentException("Invalid command type");
         }
         if (currentLightState.name().equals(((LightCommand) command).name())){
             System.out.println("Wanted state is already on for LightBulb");
