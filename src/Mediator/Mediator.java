@@ -2,12 +2,13 @@ package Mediator;
 
 import Command.DoorCommand;
 import Command.LightCommand;
-import Command.TemperatureCommand;
 import Entity.ControlPanel;
 import Entity.DoorLock;
 import Entity.LightBulb;
 import Entity.Thermostat;
 import Interface.ICommand;
+
+import java.util.Random;
 
 public class Mediator {
     private final Thermostat thermostat;
@@ -22,8 +23,15 @@ public class Mediator {
         this.controlPanel = controlPanel;
     }
 
-    public void readTemperature(int temperature) {
-        controlPanel.readTemperature(temperature, thermostat);
+    public int generateRandomTemperature(){
+        Random rand = new Random();
+        return rand.nextInt(45);
+    }
+
+    public void checkTemperature(int temperature) {
+        ICommand command = controlPanel.checkTemperature(temperature);
+        thermostat.setCurrentTemperature(temperature);
+        thermostat.receiveCommand(command);
     }
 
     public int readNewTemperature() {

@@ -4,5 +4,6 @@ import Interface.ICommand;
 
 public enum TemperatureCommand implements ICommand {
     LOWER,
-    HIGHER
+    HIGHER,
+    STANDARD
 }

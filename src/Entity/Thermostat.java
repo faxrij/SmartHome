@@ -15,7 +15,7 @@ public class Thermostat implements IActuator {
             currentTemperature = 20;
             System.out.println("Temperature increased");
         }
-        else {
+        else if (command.equals(TemperatureCommand.LOWER)) {
             currentTemperature = 25;
             System.out.println("Temperature decreased");
         }

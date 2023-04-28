@@ -48,7 +48,6 @@ public class MainFlow {
         public void run() {
             System.out.println("Run: " + (count+1));
             temperatureSensor.sendReading();
-            temperatureSensor.newTemp();
             controlPanel.chooseRandomEventForLight();
             controlPanel.chooseRandomEventForMotion();
 
