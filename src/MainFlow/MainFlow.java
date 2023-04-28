@@ -20,13 +20,13 @@ public class MainFlow {
 
     DoorLock doorLock = new DoorLock(DoorState.UNLOCKED);
     LightBulb lightBulb = new LightBulb(LightState.OFF);
-
-    Mediator mediator = new Mediator(thermostat, doorLock, lightBulb);
-
     ControlPanel controlPanel = new ControlPanel();
+
+    Mediator mediator = new Mediator(thermostat, doorLock, lightBulb, controlPanel);
+
     controlPanel.setMediator(mediator);
 
-    ISensor temperatureSensor = new TemperatureSensor(mediator);
+    TemperatureSensor temperatureSensor = new TemperatureSensor(mediator);
 
     Timer timer = new Timer();
     SensorTask sensorTask = new SensorTask(temperatureSensor, controlPanel, timer);
@@ -34,12 +34,12 @@ public class MainFlow {
 }
 
     static class SensorTask extends TimerTask {
-        private final ISensor temperatureSensor;
+        private final TemperatureSensor temperatureSensor;
         private final Timer timer;
         private final ControlPanel controlPanel;
         private int count;
 
-        public SensorTask(ISensor temperatureSensor, ControlPanel controlPanel, Timer timer) {
+        public SensorTask(TemperatureSensor temperatureSensor, ControlPanel controlPanel, Timer timer) {
             this.temperatureSensor = temperatureSensor;
             this.timer = timer;
             this.controlPanel = controlPanel;
@@ -48,6 +48,7 @@ public class MainFlow {
         public void run() {
             System.out.println("Run: " + (count+1));
             temperatureSensor.sendReading();
+            temperatureSensor.newTemp();
             controlPanel.chooseRandomEventForLight();
             controlPanel.chooseRandomEventForMotion();
 

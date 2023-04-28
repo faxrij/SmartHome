@@ -12,16 +12,20 @@ public class Thermostat implements IActuator {
             throw new IllegalArgumentException("Invalid command type");
         }
         if (command.equals(TemperatureCommand.HIGHER)) {
-            currentTemperature += 5;
-            System.out.println("Increasing temperature by 5 degrees");
+            currentTemperature = 20;
+            System.out.println("Temperature increased");
         }
         else {
-            currentTemperature -= 5;
-            System.out.println("Decreasing temperature by 5 degrees");
+            currentTemperature = 25;
+            System.out.println("Temperature decreased");
         }
     }
 
     public void setCurrentTemperature(int temperature) {
         currentTemperature = temperature;
+    }
+
+    public int getCurrentTemperature() {
+        return currentTemperature;
     }
 }

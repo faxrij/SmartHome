@@ -1,5 +1,7 @@
 package Entity;
 
+import Command.TemperatureCommand;
+import Interface.ICommand;
 import Interface.IControlPanel;
 import Mediator.Mediator;
 
@@ -54,5 +56,21 @@ public class ControlPanel implements IControlPanel {
     @Override
     public void unlockDoors() {
         mediator.unlockDoors();
+    }
+
+    public void readTemperature(int temperature, Thermostat thermostat) {
+        ICommand command =  TemperatureCommand.LOWER;
+
+        if (temperature >= 20 && temperature <= 25) {
+            System.out.println("Temperature is fine");
+            thermostat.setCurrentTemperature(temperature);
+            return;  // To PREVENT PRINTING LOWER FOR RANGE OF 20 - 25
+        }
+
+        else if (temperature < 20) {
+            command = TemperatureCommand.HIGHER;
+        }
+
+        thermostat.receiveCommand(command);
     }
 }

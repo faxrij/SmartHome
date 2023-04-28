@@ -3,6 +3,7 @@ package Mediator;
 import Command.DoorCommand;
 import Command.LightCommand;
 import Command.TemperatureCommand;
+import Entity.ControlPanel;
 import Entity.DoorLock;
 import Entity.LightBulb;
 import Entity.Thermostat;
@@ -12,26 +13,22 @@ public class Mediator {
     private final Thermostat thermostat;
     private final DoorLock doorLock;
     private final LightBulb lightBulb;
+    private final ControlPanel controlPanel;
 
-    public Mediator(Thermostat thermostat, DoorLock doorLock, LightBulb lightBulb) {
+    public Mediator(Thermostat thermostat, DoorLock doorLock, LightBulb lightBulb, ControlPanel controlPanel) {
         this.thermostat = thermostat;
         this.doorLock = doorLock;
         this.lightBulb = lightBulb;
+        this.controlPanel = controlPanel;
     }
 
     public void readTemperature(int temperature) {
-        ICommand command =  TemperatureCommand.LOWER;
+        controlPanel.readTemperature(temperature, thermostat);
+    }
 
-        if (temperature >= 20 && temperature <= 25) {
-            System.out.println("Temperature is fine");
-            return;  // To PREVENT PRINTING LOWER FOR RANGE OF 20 - 25
-        }
+    public int readNewTemperature() {
+        return thermostat.getCurrentTemperature();
 
-        else if (temperature < 20) {
-            command = TemperatureCommand.HIGHER;
-        }
-
-        thermostat.receiveCommand(command);
     }
 
     public void readMotion(DoorCommand doorCommand) {
