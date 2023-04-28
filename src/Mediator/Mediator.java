@@ -7,6 +7,8 @@ import Entity.DoorLock;
 import Entity.LightBulb;
 import Entity.Thermostat;
 import Interface.ICommand;
+import State.DoorState;
+import State.LightState;
 
 import java.util.Random;
 
@@ -39,31 +41,21 @@ public class Mediator {
 
     }
 
-    public void readMotion(DoorCommand doorCommand) {
-        doorLock.receiveCommand(doorCommand);
+    public void changeLightState(){
+        ICommand command = controlPanel.chooseRandomEventForLight();
+        lightBulb.receiveCommand(command);
     }
 
-    public void turnLightOn() {
-        lightBulb.receiveCommand(LightCommand.ON);
+    public LightState getLightState() {
+        return lightBulb.getCurrentLightState();
     }
 
-    public void turnLightOff() {
-        lightBulb.receiveCommand(LightCommand.OFF);
+    public void changeDoorState() {
+        ICommand command = controlPanel.chooseRandomEventForMotion();
+        doorLock.receiveCommand(command);
     }
 
-    public void lockDoors() {
-        doorLock.receiveCommand(DoorCommand.LOCK);
-    }
-
-    public void unlockDoors() {
-        doorLock.receiveCommand(DoorCommand.UNLOCK);
-    }
-
-    public void setTemperature(int temperature) {
-        thermostat.setCurrentTemperature(temperature);
-    }
-
-    public void readLight(LightCommand lightCommand) {
-        lightBulb.receiveCommand(lightCommand);
+    public DoorState getDoorState() {
+        return doorLock.getCurrentDoorState();
     }
 }

@@ -1,26 +1,35 @@
 package Sensor;
 
 import Command.DoorCommand;
+import Entity.DoorLock;
+import Interface.ICommand;
 import Interface.ISensor;
 import Mediator.Mediator;
+import State.DoorState;
 
 import java.util.*;
 
 public class MotionSensor implements ISensor {
     private final Mediator mediator;
-    private final List<DoorCommand> doorCommandList;
 
     public MotionSensor(Mediator mediator) {
         this.mediator = mediator;
-        doorCommandList = new ArrayList<>();
-        doorCommandList.add(DoorCommand.LOCK);
-        doorCommandList.add(DoorCommand.UNLOCK);
     }
 
     @Override
     public void sendReading() {
-        Random random = new Random();
-        DoorCommand randomDoorCommand = doorCommandList.get(random.nextInt(2));
-        mediator.readMotion(randomDoorCommand);
+        DoorState currentDoorState = mediator.getDoorState();
+        mediator.changeDoorState();
+        DoorState newDoorState = mediator.getDoorState();
+
+        if (currentDoorState.name().startsWith(newDoorState.name())){
+            System.out.println("Wanted state is already on for DoorLock");
+        }
+        else if (newDoorState.equals(DoorState.UNLOCKED)){
+            System.out.println("Doors are closing");
+        }
+        else if (newDoorState.equals(DoorState.LOCKED)){
+            System.out.println("Doors are opening");
+        }
     }
 }

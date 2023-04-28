@@ -4,8 +4,9 @@ import Entity.ControlPanel;
 import Entity.DoorLock;
 import Entity.LightBulb;
 import Entity.Thermostat;
-import Interface.ISensor;
 import Mediator.Mediator;
+import Sensor.LightSensor;
+import Sensor.MotionSensor;
 import Sensor.TemperatureSensor;
 import State.DoorState;
 import State.LightState;
@@ -24,32 +25,34 @@ public class MainFlow {
 
     Mediator mediator = new Mediator(thermostat, doorLock, lightBulb, controlPanel);
 
-    controlPanel.setMediator(mediator);
-
     TemperatureSensor temperatureSensor = new TemperatureSensor(mediator);
+    LightSensor lightSensor = new LightSensor(mediator);
+    MotionSensor motionSensor = new MotionSensor(mediator);
 
     Timer timer = new Timer();
-    SensorTask sensorTask = new SensorTask(temperatureSensor, controlPanel, timer);
+    SensorTask sensorTask = new SensorTask(temperatureSensor, lightSensor, motionSensor, timer);
         timer.schedule(sensorTask, 0, 1000);
 }
 
     static class SensorTask extends TimerTask {
         private final TemperatureSensor temperatureSensor;
+        private final LightSensor lightSensor;
+        private final MotionSensor motionSensor;
         private final Timer timer;
-        private final ControlPanel controlPanel;
         private int count;
 
-        public SensorTask(TemperatureSensor temperatureSensor, ControlPanel controlPanel, Timer timer) {
+        public SensorTask(TemperatureSensor temperatureSensor, LightSensor lightSensor, MotionSensor motionSensor, Timer timer) {
             this.temperatureSensor = temperatureSensor;
+            this.lightSensor = lightSensor;
+            this.motionSensor = motionSensor;
             this.timer = timer;
-            this.controlPanel = controlPanel;
         }
 
         public void run() {
             System.out.println("Run: " + (count+1));
             temperatureSensor.sendReading();
-            controlPanel.chooseRandomEventForLight();
-            controlPanel.chooseRandomEventForMotion();
+            lightSensor.sendReading();
+            motionSensor.sendReading();
 
             System.out.println();
 

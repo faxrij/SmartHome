@@ -1,62 +1,40 @@
 package Entity;
 
+import Command.DoorCommand;
+import Command.LightCommand;
 import Command.TemperatureCommand;
 import Interface.ICommand;
-import Interface.IControlPanel;
 import Mediator.Mediator;
 
 import java.util.Random;
 
-public class ControlPanel implements IControlPanel {
-    private Mediator mediator;
-    public void setMediator(Mediator mediator) {
-        this.mediator = mediator;
-    }
+public class ControlPanel {
 
-    public void chooseRandomEventForLight() {
+    public ICommand chooseRandomEventForLight() {
+        ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
-            this.turnLightOn();
+            command = LightCommand.ON;
         }
         else {
-            this.turnLightOff();
+            command = LightCommand.OFF;
         }
+        return command;
     }
 
-    public void chooseRandomEventForMotion() {
+    public ICommand chooseRandomEventForMotion() {
+        ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
-            this.lockDoors();
+            command = DoorCommand.LOCK;
         }
         else {
-            this.unlockDoors();
+            command = DoorCommand.UNLOCK;
         }
+        return command;
     }
 
-    @Override
-    public void setTemperature(int temperature) {
-        mediator.setTemperature(temperature);
-    }
 
-    @Override
-    public void turnLightOn() {
-        mediator.turnLightOn();
-    }
-
-    @Override
-    public void turnLightOff() {
-        mediator.turnLightOff();
-    }
-
-    @Override
-    public void lockDoors() {
-        mediator.lockDoors();
-    }
-
-    @Override
-    public void unlockDoors() {
-        mediator.unlockDoors();
-    }
 
     public ICommand checkTemperature(int temperature) {
         ICommand command =  TemperatureCommand.LOWER;
