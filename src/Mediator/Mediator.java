@@ -1,7 +1,5 @@
 package Mediator;
 
-import Command.DoorCommand;
-import Command.LightCommand;
 import Entity.ControlPanel;
 import Entity.DoorLock;
 import Entity.LightBulb;

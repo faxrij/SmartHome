@@ -1,13 +1,9 @@
 package Sensor;
 
-import Command.DoorCommand;
-import Entity.DoorLock;
-import Interface.ICommand;
 import Interface.ISensor;
 import Mediator.Mediator;
 import State.DoorState;
 
-import java.util.*;
 
 public class MotionSensor implements ISensor {
     private final Mediator mediator;

@@ -4,7 +4,6 @@ import Command.DoorCommand;
 import Command.LightCommand;
 import Command.TemperatureCommand;
 import Interface.ICommand;
-import Mediator.Mediator;
 
 import java.util.Random;
 

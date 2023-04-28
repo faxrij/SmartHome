@@ -1,14 +1,9 @@
 package Sensor;
 
-import Command.LightCommand;
-import Interface.ICommand;
 import Interface.ISensor;
 import Mediator.Mediator;
 import State.LightState;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class LightSensor implements ISensor {
     private final Mediator mediator;
