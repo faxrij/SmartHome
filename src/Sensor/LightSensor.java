@@ -15,7 +15,7 @@ public class LightSensor implements ISensor {
     @Override
     public void sendReading() {
         LightState currentLightState = mediator.getLightState();
-        mediator.changeLightState();
+        mediator.getRandomAndChangeLightState();
         LightState newLightState = mediator.getLightState();
 
         if (currentLightState.name().equals(newLightState.name())){

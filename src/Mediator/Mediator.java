@@ -39,7 +39,7 @@ public class Mediator {
 
     }
 
-    public void changeLightState(){
+    public void getRandomAndChangeLightState(){
         ICommand command = controlPanel.chooseRandomCommandForLight();
         lightBulb.receiveCommand(command);
     }
@@ -48,7 +48,7 @@ public class Mediator {
         return lightBulb.getCurrentLightState();
     }
 
-    public void changeDoorState() {
+    public void getRandomAndChangeDoorState() {
         ICommand command = controlPanel.chooseRandomCommandForMotion();
         doorLock.receiveCommand(command);
     }

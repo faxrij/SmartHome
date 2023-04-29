@@ -15,7 +15,7 @@ public class MotionSensor implements ISensor {
     @Override
     public void sendReading() {
         DoorState currentDoorState = mediator.getDoorState();
-        mediator.changeDoorState();
+        mediator.getRandomAndChangeDoorState();
         DoorState newDoorState = mediator.getDoorState();
 
         if (currentDoorState.name().startsWith(newDoorState.name())){
