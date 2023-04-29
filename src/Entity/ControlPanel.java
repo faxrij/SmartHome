@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class ControlPanel {
 
-    public ICommand chooseRandomEventForLight() {
+    public ICommand chooseRandomCommandForLight() {
         ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
@@ -21,7 +21,7 @@ public class ControlPanel {
         return command;
     }
 
-    public ICommand chooseRandomEventForMotion() {
+    public ICommand chooseRandomCommandForMotion() {
         ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
