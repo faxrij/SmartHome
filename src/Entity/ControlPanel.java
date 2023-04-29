@@ -10,42 +10,35 @@ import java.util.Random;
 public class ControlPanel {
 
     public ICommand chooseRandomCommandForLight() {
-        ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
-            command = LightCommand.ON;
+            return LightCommand.ON;
         }
         else {
-            command = LightCommand.OFF;
+            return LightCommand.OFF;
         }
-        return command;
     }
 
     public ICommand chooseRandomCommandForMotion() {
-        ICommand command;
         Random rand = new Random();
         if (rand.nextInt(2) == 0) {
-            command = DoorCommand.LOCK;
+            return DoorCommand.LOCK;
         }
         else {
-            command = DoorCommand.UNLOCK;
+            return DoorCommand.UNLOCK;
         }
-        return command;
     }
 
-
-
     public ICommand checkTemperature(int temperature) {
-        ICommand command =  TemperatureCommand.LOWER;
-
         if (temperature >= 20 && temperature <= 25) {
             System.out.println("Temperature is fine");
-            command = TemperatureCommand.STANDARD;  // To PREVENT PRINTING LOWER FOR RANGE OF 20 - 25
+            return TemperatureCommand.STANDARD;  // To PREVENT PRINTING LOWER FOR RANGE OF 20 - 25
         }
-
         else if (temperature < 20) {
-            command = TemperatureCommand.HIGHER;
+            return TemperatureCommand.HIGHER;
         }
-        return command;
+        else {
+            return TemperatureCommand.LOWER;
+        }
     }
 }
