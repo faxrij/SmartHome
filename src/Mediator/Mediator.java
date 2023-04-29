@@ -40,7 +40,7 @@ public class Mediator {
     }
 
     public void changeLightState(){
-        ICommand command = controlPanel.chooseRandomCommandForLight();
+        ICommand command = controlPanel.chooseRandomEventForLight();
         lightBulb.receiveCommand(command);
     }
 
@@ -49,7 +49,7 @@ public class Mediator {
     }
 
     public void changeDoorState() {
-        ICommand command = controlPanel.chooseRandomCommandForMotion();
+        ICommand command = controlPanel.chooseRandomEventForMotion();
         doorLock.receiveCommand(command);
     }
 
