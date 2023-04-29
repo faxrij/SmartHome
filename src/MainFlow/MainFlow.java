@@ -10,6 +10,7 @@ import Sensor.MotionSensor;
 import Sensor.TemperatureSensor;
 import State.DoorState;
 import State.LightState;
+import Interface.ISensor;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,31 +18,31 @@ import java.util.TimerTask;
 public class MainFlow {
     public void start() {
 
-    Thermostat thermostat = new Thermostat();
+        Thermostat thermostat = new Thermostat();
 
-    DoorLock doorLock = new DoorLock(DoorState.UNLOCKED);
-    LightBulb lightBulb = new LightBulb(LightState.OFF);
-    ControlPanel controlPanel = new ControlPanel();
+        DoorLock doorLock = new DoorLock(DoorState.UNLOCKED);
+        LightBulb lightBulb = new LightBulb(LightState.OFF);
+        ControlPanel controlPanel = new ControlPanel();
 
-    Mediator mediator = new Mediator(thermostat, doorLock, lightBulb, controlPanel);
+        Mediator mediator = new Mediator(thermostat, doorLock, lightBulb, controlPanel);
 
-    TemperatureSensor temperatureSensor = new TemperatureSensor(mediator);
-    LightSensor lightSensor = new LightSensor(mediator);
-    MotionSensor motionSensor = new MotionSensor(mediator);
+        ISensor temperatureSensor = new TemperatureSensor(mediator);
+        ISensor lightSensor = new LightSensor(mediator);
+        ISensor motionSensor = new MotionSensor(mediator);
 
-    Timer timer = new Timer();
-    SensorTask sensorTask = new SensorTask(temperatureSensor, lightSensor, motionSensor, timer);
-        timer.schedule(sensorTask, 0, 1000);
+        Timer timer = new Timer();
+        SensorTask sensorTask = new SensorTask(temperatureSensor, lightSensor, motionSensor, timer);
+            timer.schedule(sensorTask, 0, 1000);
 }
 
     static class SensorTask extends TimerTask {
-        private final TemperatureSensor temperatureSensor;
-        private final LightSensor lightSensor;
-        private final MotionSensor motionSensor;
+        private final ISensor temperatureSensor;
+        private final ISensor lightSensor;
+        private final ISensor motionSensor;
         private final Timer timer;
         private int count;
 
-        public SensorTask(TemperatureSensor temperatureSensor, LightSensor lightSensor, MotionSensor motionSensor, Timer timer) {
+        public SensorTask(ISensor temperatureSensor, ISensor lightSensor, ISensor motionSensor, Timer timer) {
             this.temperatureSensor = temperatureSensor;
             this.lightSensor = lightSensor;
             this.motionSensor = motionSensor;
