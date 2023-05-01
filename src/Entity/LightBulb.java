@@ -16,6 +16,7 @@ public class LightBulb implements IActuator {
     public LightState getCurrentLightState() {
         return currentLightState;
     }
+
     @Override
     public void receiveCommand(ICommand command) {
         if (!(command instanceof LightCommand)){

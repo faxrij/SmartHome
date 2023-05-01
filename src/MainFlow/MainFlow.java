@@ -50,7 +50,7 @@ public class MainFlow {
         }
 
         public void run() {
-            System.out.println("Run: " + (count+1));
+            System.out.println("Second: " + (count+1));
             temperatureSensor.sendReading();
             lightSensor.sendReading();
             motionSensor.sendReading();
@@ -60,7 +60,7 @@ public class MainFlow {
             count++;
             if (count >= 20) {
                 timer.cancel();
-                System.out.println("Timer stopped after 20 runs.");
+                System.out.println("Timer stopped after 20 seconds.");
             }
         }
     }
